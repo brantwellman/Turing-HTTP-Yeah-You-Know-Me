@@ -13,7 +13,9 @@ loop do
   # client = tcp_server.accept
   # request_counter = 0
   #
-  request_counter += 1
+  unless request_lines.first == "GET /favicon.ico HTTP/1.1"
+    request_counter += 1
+  end
   #   client.puts "hello! #{request_counter}"
 
     # client.close
@@ -25,6 +27,7 @@ loop do
 
 
   response = "Hello World (#{request_counter})"
+  puts response
   # response = "<pre>" + request_lines.join("\n") + "</pre>"
   output = "<html><head></head><body>#{response}</body></html>"
   headers = ["http/1.1 200 ok",

@@ -29,7 +29,7 @@ puts origin
 accept = request_lines[4].split(": ")[1]
 puts accept
 
-response = "Verb: #{verb}\r\nPath: #{path}\r\nProtocol: #{protocol}\r\nHost: #{host}\r\nPort: #{port}\r\nOrigin: #{origin}\r\nAccept: #{accept}\r\n"
+response = "<pre>" + "Verb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost: #{host}\nPort: #{port}\nOrigin: #{origin}\nAccept: #{accept}\n"  + "</pre>"
 hello_server.server_response(response)
 
 hello_server.close_server

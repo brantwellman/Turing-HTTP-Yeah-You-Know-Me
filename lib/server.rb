@@ -25,4 +25,8 @@ class Server
     @client.puts headers
     @client.puts output
   end
+  
+  def close_server
+    @client.close
+  end
 end

@@ -1,5 +1,4 @@
 require 'socket'
-class IterationZero
 
 tcp_server = TCPServer.new(9292)
 client = tcp_server.accept
@@ -34,4 +33,3 @@ end
 puts ["Wrote this response:", headers, output].join("\n")
 client.close
 puts "\nResponse complete, exiting."
-end

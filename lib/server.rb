@@ -19,11 +19,6 @@ class Server
     verb = @request_lines[0].split(" ")[0]
     path = @request_lines[0].split(" ")[1]
     protocol = @request_lines[0].split(" ")[2]
-    #
-    # host = @request_lines[1].split(":")[1].strip
-    # port = @request_lines[1].split(":")[2]
-    # origin = @request_lines[1].split(":")[1].strip
-
     host = @request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[1].strip
     port = @request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[2]
     origin = host

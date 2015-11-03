@@ -28,6 +28,10 @@ class Server
     "<pre>" + "Verb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost: #{host}\nPort: #{port}\nOrigin: #{origin}\n#{accept}\n"  + "</pre>"
   end
 
+  def request_path
+    @request_lines[0].split(" ")[1]
+  end
+
   def server_response(response)
     output = "<html><head></head><body>#{response}</body></html>"
     headers = ["http/1.1 200 ok",

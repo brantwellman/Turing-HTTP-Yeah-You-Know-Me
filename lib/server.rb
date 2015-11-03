@@ -15,6 +15,24 @@ class Server
     @request_lines
   end
 
+  def request_output
+    verb = @request_lines[0].split(" ")[0]
+    path = @request_lines[0].split(" ")[1]
+    protocol = @request_lines[0].split(" ")[2]
+    #
+    # host = @request_lines[1].split(":")[1].strip
+    # port = @request_lines[1].split(":")[2]
+    # origin = @request_lines[1].split(":")[1].strip
+
+    host = @request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[1].strip
+    port = @request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[2]
+    origin = host
+
+    accept = @request_lines.select {|line| line.start_with?("Accept:") }[0]
+
+    "<pre>" + "Verb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost: #{host}\nPort: #{port}\nOrigin: #{origin}\n#{accept}\n"  + "</pre>"
+  end
+
   def server_response(response)
     output = "<html><head></head><body>#{response}</body></html>"
     headers = ["http/1.1 200 ok",
@@ -25,7 +43,7 @@ class Server
     @client.puts headers
     @client.puts output
   end
-  
+
   def close_server
     @client.close
   end

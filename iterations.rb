@@ -1,6 +1,7 @@
 require './lib/server'
 require './lib/server_decorator'
 require 'date'
+require './lib/path_checker'
 
 hello_server = ServerDecorator.new(Server.new(9292))
 
@@ -14,23 +15,25 @@ loop do
   end
 
   path = hello_server.request_path(request_lines)
+  path_checker = PathChecker.new(path)
   debug = hello_server.request_output(request_lines)
 
-  if path == "/"
+  if path_checker.root?
     response = debug
-  elsif path == "/hello"
+  elsif path_checker.hello?
     unless request_lines.first == "GET /favicon.ico HTTP/1.1"
       hello_counter += 1
     end
     response = "Hello World (#{hello_counter})" + "\n" + debug
-  elsif path == "/datetime"
+  elsif path_checker.datetime?
     now_time = DateTime.now
     response = now_time.strftime('%H:%M%p on %A, %B %d, %Y')  + "\n" + debug
-  elsif path == "/shutdown"
+  elsif path_checker.shutdown?
     response = "Total Requests #{request_counter}"  + "\n" + debug
     hello_server.server_response(response)
     break
   end
+
   hello_server.server_response(response)
 end
 

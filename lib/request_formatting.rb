@@ -1,6 +1,6 @@
 require 'delegate'
 
-class ServerDecorator < SimpleDelegator
+class RequestFormatting
   def request_output(request_lines)
     verb = request_lines[0].split(" ")[0]
     path = request_lines[0].split(" ")[1]

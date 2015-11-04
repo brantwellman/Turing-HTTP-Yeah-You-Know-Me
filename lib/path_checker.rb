@@ -20,6 +20,6 @@ class PathChecker
   end
 
   def word_search?
-    @path_string.start_with?("/word_search")
+    @path_string.start_with?("/word_search?")
   end
 end

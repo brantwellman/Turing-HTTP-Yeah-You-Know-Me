@@ -33,8 +33,8 @@ class Game
           response += "\n" + number_guesses_output
         end
 
-        break if response == "Correct!"
         @server.server_response(response)
+        break if response == "Correct!\nYou have made #{guess_counter} guesses."
 
       elsif path_checker.game? && formater.verb(request_lines) == "POST"
         @guess = parser.parameters(path)[0].to_i

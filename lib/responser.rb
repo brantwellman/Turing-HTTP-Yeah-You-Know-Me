@@ -37,7 +37,6 @@ class Responser
     elsif path_checker.shutdown?
       response = "Total Requests #{request_counter}"  + "\n" + debug
     end
-
     response
   end
 

@@ -1,11 +1,12 @@
 require './lib/server'
-require './lib/server_decorator'
+require './lib/request_formatting'
 require 'date'
 require './lib/path_checker'
 require './lib/parameter_parser'
 require './lib/word_search'
 
-hello_server = ServerDecorator.new(Server.new(9292))
+hello_server = Server.new(9292)
+formater = RequestFormatting.new
 
 request_counter = 0
 hello_counter = 0
@@ -16,9 +17,9 @@ loop do
     request_counter += 1
   end
 
-  path = hello_server.request_path(request_lines)
+  path = formater.request_path(request_lines)
   path_checker = PathChecker.new(path)
-  debug = hello_server.request_output(request_lines)
+  debug = formater.request_output(request_lines)
 
   if path_checker.root?
     response = debug

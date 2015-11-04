@@ -4,6 +4,8 @@ require 'date'
 require './lib/path_checker'
 require './lib/parameter_parser'
 require './lib/word_search'
+require './lib/game'
+require 'pry'
 
 hello_server = Server.new(9292)
 formater = RequestFormatting.new
@@ -38,6 +40,18 @@ loop do
     response = words_check.word_output(words)
 
     response += debug
+
+  elsif path_checker.start_game?
+    if hello_server.verb(request_lines) == "POST"
+      # binding.pry
+      response = "Good luck!" + debug
+      hello_server.server_response(response)
+      game = Game.new(hello_server)
+      game.run
+    else
+      response = debug
+    end
+
   elsif path_checker.shutdown?
     response = "Total Requests #{request_counter}"  + "\n" + debug
     hello_server.server_response(response)

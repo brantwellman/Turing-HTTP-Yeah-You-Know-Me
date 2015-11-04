@@ -28,6 +28,6 @@ class PathChecker
   end
 
   def game?
-    @path_string == "/game"
+    @path_string.start_with?("/game")
   end
 end

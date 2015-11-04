@@ -22,4 +22,12 @@ class PathChecker
   def word_search?
     @path_string.start_with?("/word_search")
   end
+
+  def start_game?
+    @path_string == "/start_game"
+  end
+
+  def game?
+    @path_string == "/game"
+  end
 end

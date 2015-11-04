@@ -19,6 +19,8 @@ loop do
     request_counter += 1
   end
 
+  # response = Responser.new.generate_response(a, b, c, d)
+
   path = formater.request_path(request_lines)
   path_checker = PathChecker.new(path)
   debug = formater.request_output(request_lines)

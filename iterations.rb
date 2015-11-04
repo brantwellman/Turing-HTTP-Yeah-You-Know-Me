@@ -32,8 +32,8 @@ loop do
     now_time = DateTime.now
     response = now_time.strftime('%H:%M%p on %A, %B %d, %Y')  + "\n" + debug
   elsif path_checker.word_search?
-    parse_params = ParameterParser.new
-    words = parse_params.words_check(path)
+    parser = ParameterParser.new
+    words = parser.parameters(path)
     words_check = WordSearch.new
     response = words_check.word_output(words)
 

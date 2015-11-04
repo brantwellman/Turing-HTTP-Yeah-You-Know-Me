@@ -14,6 +14,10 @@ class RequestFormatting
     "<pre>" + "Verb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost: #{host}\nPort: #{port}\nOrigin: #{origin}\n#{accept}\n"  + "</pre>"
   end
 
+  def verb(request_lines)
+    request_lines[0].split(" ")[0]
+  end
+
   def request_path(request_lines)
     request_lines[0].split(" ")[1]
   end

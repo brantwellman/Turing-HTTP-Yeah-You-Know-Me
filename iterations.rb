@@ -1,10 +1,10 @@
 require './lib/server'
 require './lib/request_formatting'
-require 'date'
 require './lib/path_checker'
 require './lib/parameter_parser'
 require './lib/word_search'
 require './lib/game'
+require 'date'
 require 'pry'
 
 hello_server = Server.new(9292)
@@ -42,7 +42,7 @@ loop do
     response += debug
 
   elsif path_checker.start_game?
-    if hello_server.verb(request_lines) == "POST"
+    if formater.verb(request_lines) == "POST"
       # binding.pry
       response = "Good luck!" + debug
       hello_server.server_response(response)

@@ -21,14 +21,10 @@ class Server
     @request_lines_game = []
     line_number = false
     while line = @client.gets and !line_number
-      # puts line
-      # binding.pry
       @request_lines_game << line.chomp
-      # binding.pry
       line_number = (line == "0" || line.to_i > 0)
     end
     puts @request_lines_game
-    # binding.pry
     @request_lines_game
   end
 
@@ -44,7 +40,6 @@ class Server
   end
 
   def game_server_response
-    binding.pry
     output = "<html><head></head><body></body></html>"
     headers = ["http/1.1 302 found",
               "Location: http://127.0.0.1:9292/game",

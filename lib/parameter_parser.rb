@@ -9,8 +9,4 @@ class ParameterParser
       end
     end
   end
-
-  # def words_check(path)
-  #   url_splitter(path)
-  # end
 end

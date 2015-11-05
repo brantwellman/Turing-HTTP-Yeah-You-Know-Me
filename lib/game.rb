@@ -14,12 +14,6 @@ class Game
 
   def run
     loop do
-      # binding.pry
-      # request_lines = @server.game_client_request
-      # debug = formater.request_output(request_lines)
-      # path = formater.request_path(request_lines)
-      # path_checker = PathChecker.new(path)
-
       request_lines = @server.client_request
       debug = formater.request_output(request_lines)
       path = formater.request_path(request_lines)
@@ -29,7 +23,6 @@ class Game
         request_body_lines = @server.game_client_request
       end
 
-      binding.pry
       if path_checker.game? && formater.verb(request_lines) == "GET"
         number_guesses_output = "You have made #{guess_counter} guesses."
 

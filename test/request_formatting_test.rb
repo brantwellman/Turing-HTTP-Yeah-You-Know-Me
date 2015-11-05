@@ -107,4 +107,34 @@ class RequestFormattingTest < Minitest::Test
       expected = "/word_search?word=pizz&word2=dog"
       assert_equal expected, formatter.request_path(request_lines)
   end
+
+  def test_verb_get
+    formatter = RequestFormatting.new
+    request_lines = ["GET /word_search?word=pizz&word2=dog HTTP/1.1",
+                     "Host: 127.0.0.1:9292",
+                     "Connection: keep-alive",
+                     "Cache-Control: max-age=0",
+                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                     "Upgrade-Insecure-Requests: 1",
+                     "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36",
+                     "Accept-Encoding: gzip, deflate, sdch",
+                     "Accept-Language: en-US,en;q=0.8"]
+      expected = "GET"
+      assert_equal expected, formatter.verb(request_lines)
+  end
+
+  def test_verb_post
+    formatter = RequestFormatting.new
+    request_lines = ["POST /start_game HTTP/1.1",
+                     "Host: 127.0.0.1:9292",
+                     "Connection: keep-alive",
+                     "Cache-Control: max-age=0",
+                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                     "Upgrade-Insecure-Requests: 1",
+                     "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36",
+                     "Accept-Encoding: gzip, deflate, sdch",
+                     "Accept-Language: en-US,en;q=0.8"]
+      expected = "POST"
+      assert_equal expected, formatter.verb(request_lines)
+  end
 end

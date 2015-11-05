@@ -1,5 +1,3 @@
-require 'delegate'
-
 class RequestFormatting
   def request_output(request_lines)
     verb = request_lines[0].split(" ")[0]
@@ -8,9 +6,7 @@ class RequestFormatting
     host = request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[1].strip
     port = request_lines.select {|line| line.start_with?("Host:") }[0].split(":")[2]
     origin = host
-
     accept = request_lines.select {|line| line.start_with?("Accept:") }[0]
-
     "<pre>" + "Verb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost: #{host}\nPort: #{port}\nOrigin: #{origin}\n#{accept}\n"  + "</pre>"
   end
 

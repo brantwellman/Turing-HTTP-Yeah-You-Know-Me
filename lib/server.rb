@@ -1,5 +1,4 @@
 require 'socket'
-require 'pry'
 
 class Server
   def initialize(port_number)
@@ -22,9 +21,8 @@ class Server
     line_number = false
     while line = @client.gets and !line_number
       @request_lines_game << line.chomp
-      line_number = (line == "0" || line.to_i > 0)
+      line_number = is_number?(line)
     end
-    puts @request_lines_game
     @request_lines_game
   end
 
@@ -53,5 +51,9 @@ class Server
 
   def close_server
     @client.close
+  end
+
+  def is_number?(line)
+    line == "0" || line.to_i > 0
   end
 end

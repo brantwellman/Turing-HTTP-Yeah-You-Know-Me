@@ -1,12 +1,11 @@
-require_relative 'request_formatting'
-require_relative 'path_checker'
+require './lib/request_formatting'
+require './lib/path_checker'
 require './lib/parameter_parser'
 require './lib/word_search'
 
 class Responser
   def initialize
     @formatter = RequestFormatting.new
-    # @response_strings = ResponseStrings.new
   end
 
   def generate_response(request_lines, hello_counter, request_counter)
@@ -16,7 +15,6 @@ class Responser
 
     if path_checker.root?
       response = debug
-      # response = @response_strings.root
     elsif path_checker.hello?
       response = "Hello World (#{hello_counter})" + "\n" + debug
     elsif path_checker.datetime?

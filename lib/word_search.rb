@@ -15,9 +15,6 @@ class WordSearch
         "#{word} is not a known word."
       end
     end
-    output = "<pre>" + check_words_for_output.join("\n") + "</pre>"
+    "<pre>" + check_words_for_output.join("\n") + "</pre>"
   end
 end
-#
-# word_search = WordSearch.new
-# puts word_search.is_word?("pizz")

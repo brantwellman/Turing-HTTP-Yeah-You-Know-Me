@@ -81,4 +81,16 @@ class PathCheckerTest < Minitest::Test
     path_checker = PathChecker.new(string)
     refute path_checker.word_search?
   end
+
+  def test_assert_start_game
+    string = "/start_game"
+    path_checker = PathChecker.new(string)
+    assert path_checker.start_game?
+  end
+
+  def test_assert_game
+    string = "/game"
+    path_checker = PathChecker.new(string)
+    assert path_checker.game?
+  end
 end

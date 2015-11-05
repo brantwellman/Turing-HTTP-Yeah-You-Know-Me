@@ -15,10 +15,19 @@ class Game
   def run
     loop do
       # binding.pry
-      request_lines = @server.game_client_request
+      # request_lines = @server.game_client_request
+      # debug = formater.request_output(request_lines)
+      # path = formater.request_path(request_lines)
+      # path_checker = PathChecker.new(path)
+
+      request_lines = @server.client_request
       debug = formater.request_output(request_lines)
       path = formater.request_path(request_lines)
       path_checker = PathChecker.new(path)
+
+      if path_checker.game? && formater.verb(request_lines) == "POST"
+        request_body_lines = @server.game_client_request
+      end
 
       binding.pry
       if path_checker.game? && formater.verb(request_lines) == "GET"
@@ -40,7 +49,7 @@ class Game
 
 
       elsif path_checker.game? && formater.verb(request_lines) == "POST"
-        @guess = request_lines.last.to_i
+        @guess = request_body_lines.last.to_i
         @guess_counter += 1
         number_guesses_output = "You have made #{guess_counter} guesses."
 

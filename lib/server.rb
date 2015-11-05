@@ -1,4 +1,5 @@
 require 'socket'
+require 'pry'
 
 class Server
   def initialize(port_number)
@@ -15,6 +16,18 @@ class Server
     @request_lines
   end
 
+  def game_client_request
+    puts "Ready for a game request"
+    @request_lines_game = []
+    line_number = false
+    while line = @client.gets and !line_number
+      @request_lines_game << line.chomp
+      line_number = (line == "0" || line.to_i > 0)
+    end
+    puts @request_lines_game
+    @request_lines_game
+  end
+
   def server_response(response)
     output = "<html><head></head><body>#{response}</body></html>"
     headers = ["http/1.1 200 ok",
@@ -26,8 +39,8 @@ class Server
     @client.puts output
   end
 
-  def game_server_response(response)
-    output = "<html><head></head><body>#{response}</body></html>"
+  def game_server_response
+    output = "<html><head></head><body></body></html>"
     headers = ["http/1.1 302 found",
               "Location: http://127.0.0.1:9292/game",
               "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",

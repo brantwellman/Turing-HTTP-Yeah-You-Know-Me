@@ -19,6 +19,10 @@ class Game
       path = formater.request_path(request_lines)
       path_checker = PathChecker.new(path)
 
+      if path_checker.game? && formater.verb(request_lines) == "POST"
+        request_body_lines = @server.game_client_request
+      end
+
       if path_checker.game? && formater.verb(request_lines) == "GET"
         number_guesses_output = "You have made #{guess_counter} guesses."
 
@@ -36,12 +40,13 @@ class Game
         @server.server_response(response)
         break if response == "Correct!\nYou have made #{guess_counter} guesses."
 
+
       elsif path_checker.game? && formater.verb(request_lines) == "POST"
-        @guess = parser.parameters(path)[0].to_i
+        @guess = request_body_lines.last.to_i
         @guess_counter += 1
         number_guesses_output = "You have made #{guess_counter} guesses."
 
-        @server.game_server_response("hey now redirect")
+        @server.game_server_response
       end
     end
   end
